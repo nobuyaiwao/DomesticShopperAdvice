@@ -19,6 +19,9 @@ const getQueryParam = (param) => {
     return urlParams.get(param);
 };
 
+// Global Valuables
+let finalPaymentResult = null;
+
 // Function to initialize the Card Component
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOM fully loaded and parsed.");
@@ -183,6 +186,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         updatePaymentsLog("Payment Request", paymentsReqData);
                         const result = await makePayment(paymentsReqData);
                         updatePaymentsLog("Payment Response", result );
+                        finalPaymentResult = result;
 
                         if (!result.resultCode) {
                             console.error("Payment failed, missing resultCode.");
@@ -226,8 +230,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                         const { resultCode, action } = result;
 
                         console.log("Handling additional details:", { resultCode, action });
-                        actions.resolve({ resultCode });
+                        actions.resolve({ result });
                         //actions.resolve({ resultCode, action });
+
                     } catch (error) {
                         console.error("Additional details processing error:", error);
                         actions.reject();
@@ -237,11 +242,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                     console.log("### card::onPaymentCompleted:: calling");
                     console.log(result);
+                    console.log(finalPaymentResult);
+
+                    const advice = finalPaymentResult?.additionalData?.domesticShopperAdvice || "No advice provided";
 
                     const cardContainer = document.getElementById("card-container");
                     cardContainer.innerHTML = `
                         <h2>Payment Result</h2>
                         <p><strong>Status:</strong> ${result.resultCode}</p>
+                        <p><strong>Advice:</strong> ${advice}</p>
                     `;
 
                 },
@@ -249,6 +258,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                     console.log("### card::onPaymentFailed:: calling");
                     console.log(result);
+                    console.log(finalPaymentResult);
+
+                    const advice = finalPaymentResult?.additionalData?.domesticShopperAdvice || "No advice provided";
 
                     const cardContainer = document.getElementById("card-container");
                     cardContainer.innerHTML = `
