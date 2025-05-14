@@ -244,6 +244,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <p><strong>Status:</strong> ${result.resultCode}</p>
                     `;
 
+                },
+                onPaymentFailed: async (result, component) => {
+
+                    console.log("### card::onPaymentFailed:: calling");
+                    console.log(result);
+
+                    const cardContainer = document.getElementById("card-container");
+                    cardContainer.innerHTML = `
+                        <h2>Payment Result</h2>
+                        <p><strong>Status:</strong> ${result.resultCode}</p>
+                    `;
+
                 }
             };
 
