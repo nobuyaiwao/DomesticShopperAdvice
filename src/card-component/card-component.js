@@ -220,6 +220,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         updatePaymentsLog("Details Request", state.data);
                         const result = await makeDetails(state.data);
                         updatePaymentsLog("Details Response", result);
+                        finalPaymentResult = result;
 
                         if (!result.resultCode) {
                             console.error("Additional details processing failed: Missing resultCode.");
@@ -227,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             return;
                         }
 
-                        const { resultCode } = result;
+                        const { resultCode, action } = result;
 
                         console.log("Handling additional details:", { resultCode, action });
                         actions.resolve({ resultCode });
