@@ -227,11 +227,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                             return;
                         }
 
-                        const { resultCode, action } = result;
+                        const { resultCode } = result;
 
                         console.log("Handling additional details:", { resultCode, action });
-                        actions.resolve({ result });
-                        //actions.resolve({ resultCode, action });
+                        actions.resolve({ resultCode });
 
                     } catch (error) {
                         console.error("Additional details processing error:", error);
