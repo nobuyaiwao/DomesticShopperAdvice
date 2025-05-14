@@ -10,8 +10,8 @@
 }
 */
 .adyen-checkout__input-wrapper {
-  background: red;
 /*
+  background: red;
   background: #ccffe5; 
 */
   border-bottom: 1px dashed red !important;
