@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const translations = {
                 "ja-JP": {
-                    "payButton": "このカードを登録",
+                    "payButton": "Test Domestic Shopper Advice",
                     "form.instruction": ""
                 }
             };
