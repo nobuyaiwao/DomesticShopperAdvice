@@ -254,6 +254,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     cardContainer.innerHTML = `
                         <h2>Payment Result</h2>
                         <p><strong>Status:</strong> ${result.resultCode}</p>
+                        <p><strong>Shopper Advice:</strong> ${result.additionalData.domesticShopperAdvice}</p>
                     `;
 
                 }
